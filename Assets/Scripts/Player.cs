@@ -6,7 +6,10 @@ using UnityEngine;
 public class Player : MonoBehaviour {
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] float movePadding = 1f;
-    [SerializeField] Laser laser;
+    [SerializeField] GameObject laserPrefab;
+    [SerializeField] float laserSpeed = 15f;
+    [SerializeField] float laserFiringPeriod = 0.25f;
+    Coroutine fireCoroutine;
 
     float xMin;
     float xMax;
@@ -14,23 +17,37 @@ public class Player : MonoBehaviour {
     float yMax;
 
 	// Use this for initialization
-	void Start () {
+    void Start () {
         SetUpMoveBondaries();
 	}
-
-    private void SetUpMoveBondaries()
-    {
-        Camera gameCamera = Camera.main;
-        xMin = gameCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).x + movePadding;
-        xMax = gameCamera.ViewportToWorldPoint(new Vector3(1, 0, 0)).x - movePadding;
-        yMin = gameCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).y + movePadding;
-        yMax = gameCamera.ViewportToWorldPoint(new Vector3(0, 1, 0)).y - movePadding;
-    }
 
     // Update is called once per frame
     void Update () {
         Move();
+        Fire();
 	}
+
+    private void Fire()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            fireCoroutine = StartCoroutine(FireContinuously());
+        }
+        if(Input.GetButtonUp("Fire1"))
+        {
+            StopCoroutine(fireCoroutine);
+        }
+    }
+
+    IEnumerator FireContinuously(){
+        while(true)
+        {
+            GameObject laser = Instantiate(laserPrefab, transform.position, Quaternion.identity) as GameObject;
+            laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, laserSpeed);
+            yield return new WaitForSeconds(laserFiringPeriod);
+        }
+
+    }
 
     private void Move()
     {
@@ -41,5 +58,15 @@ public class Player : MonoBehaviour {
         float newYPos = Mathf.Clamp(transform.position.y + deltaY,yMin, yMax);
 
         transform.position = new Vector2(newXPos, newYPos);
+    }
+
+
+    private void SetUpMoveBondaries()
+    {
+        Camera gameCamera = Camera.main;
+        xMin = gameCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).x + movePadding;
+        xMax = gameCamera.ViewportToWorldPoint(new Vector3(1, 0, 0)).x - movePadding;
+        yMin = gameCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).y + movePadding;
+        yMax = gameCamera.ViewportToWorldPoint(new Vector3(0, 1, 0)).y - movePadding;
     }
 }

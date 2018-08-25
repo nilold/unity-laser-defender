@@ -113,54 +113,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &67387999
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4625340486928378, guid: 77b8ac267ec314ae780b6ccccdb790a6, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0.95
-      objectReference: {fileID: 0}
-    - target: {fileID: 4625340486928378, guid: 77b8ac267ec314ae780b6ccccdb790a6, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -6.33
-      objectReference: {fileID: 0}
-    - target: {fileID: 4625340486928378, guid: 77b8ac267ec314ae780b6ccccdb790a6, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -0.1341474
-      objectReference: {fileID: 0}
-    - target: {fileID: 4625340486928378, guid: 77b8ac267ec314ae780b6ccccdb790a6, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4625340486928378, guid: 77b8ac267ec314ae780b6ccccdb790a6, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4625340486928378, guid: 77b8ac267ec314ae780b6ccccdb790a6, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4625340486928378, guid: 77b8ac267ec314ae780b6ccccdb790a6, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4625340486928378, guid: 77b8ac267ec314ae780b6ccccdb790a6, type: 2}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 77b8ac267ec314ae780b6ccccdb790a6, type: 2}
-  m_IsPrefabAsset: 0
---- !u!114 &67388000 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114561306803768670, guid: 77b8ac267ec314ae780b6ccccdb790a6,
-    type: 2}
-  m_PrefabInternal: {fileID: 67387999}
-  m_Script: {fileID: 11500000, guid: eafab7d6f488443149d75ddf7875f42f, type: 3}
 --- !u!1001 &270345902
 Prefab:
   m_ObjectHideFlags: 0
@@ -202,9 +154,9 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114090717578016010, guid: c9f776b2ac6ea4e9f8dbed30df03eead,
         type: 2}
-      propertyPath: laser
-      value: 
-      objectReference: {fileID: 67388000}
+      propertyPath: laserFiringPeriod
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9f776b2ac6ea4e9f8dbed30df03eead, type: 2}
   m_IsPrefabAsset: 0
