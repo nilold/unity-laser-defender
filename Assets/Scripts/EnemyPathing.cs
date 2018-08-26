@@ -12,6 +12,7 @@ public class EnemyPathing : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        //waveConfig = FindObjectOfType<WaveConfig>();
         waypoints = waveConfig.GetWaypoints();
         transform.position = waypoints[waypointIndex].position;
     }
@@ -25,6 +26,8 @@ public class EnemyPathing : MonoBehaviour
     public void SetWaveConfig(WaveConfig waveConfig)
     {
         this.waveConfig = waveConfig;
+        waypoints = waveConfig.GetWaypoints();
+        transform.position = waypoints[waypointIndex].position;
     }
 
     private void Move()

@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class Laser : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    [SerializeField] public float damage = 100f;
+
+    public float Damage
+    {
+        get
+        {
+            return damage;
+        }
+    }
+
+    public void Hit(){
+        Destroy(gameObject);
+    }
+
 }
