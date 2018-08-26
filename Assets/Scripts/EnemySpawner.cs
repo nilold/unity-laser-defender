@@ -3,18 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour {
+public class EnemySpawner : MonoBehaviour
+{
 
     [SerializeField] List<WaveConfig> waveConfigs;
+    [SerializeField] bool looping = false;
+
     int currentWaveIndex = 0;
     int startingWaveIndex = 0;
 
-
-	// Use this for initialization
-	void Start () {
+    IEnumerator Start()
+    {
         WaveConfig currentWave = waveConfigs[startingWaveIndex];
-        StartCoroutine(SpawnAllWaves());
-	}
+        do
+        {
+            yield return StartCoroutine(SpawnAllWaves());
+        }
+        while (looping);
+    }
 
     private IEnumerator SpawnAllWaves()
     {
@@ -34,9 +40,4 @@ public class EnemySpawner : MonoBehaviour {
             yield return new WaitForSeconds(currentWave.GetSpawnPeriod());
         }
     }
-
-    // Update is called once per frame
-    void Update () {
-		
-	}
 }
