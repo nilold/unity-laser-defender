@@ -9,10 +9,15 @@ public class Enemy : MonoBehaviour
     [SerializeField] GameObject enemyLaserPrefab;
     [SerializeField] float laserSpeed;
     [SerializeField] float shotPeriodRandomTweak = 5f;
+    [SerializeField] int hitScore = 50;
+    [SerializeField] int destroyScore = 100;
+    ScoreKeeper playerScore; 
+
     float shotPeriod = 1f;
 
     void Start()
     {
+        playerScore = GameObject.Find("Score").GetComponent<ScoreKeeper>();
         if (enemyLaserPrefab)
             StartCoroutine(ShotCoroutine());
     }
@@ -56,7 +61,7 @@ public class Enemy : MonoBehaviour
     private void Hit(Collider2D collision, Laser laser)
     {
         float damage = laser.Damage;
-        Debug.Log("Hit! Damage: " + damage.ToString());
+        playerScore.AddScore(hitScore);
         health -= damage;
 
         if (health <= 0)
@@ -69,6 +74,7 @@ public class Enemy : MonoBehaviour
     private void Die()
     {
         Debug.Log("Enemy destroyed");
+        playerScore.AddScore(destroyScore);
         Destroy(gameObject);
     }
 

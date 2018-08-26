@@ -11,6 +11,9 @@ public class Player : MonoBehaviour
     [SerializeField] float laserSpeed = 15f;
     [SerializeField] float laserFiringPeriod = 0.25f;
     [SerializeField] float playerHealth = 600;
+
+    [SerializeField] AudioClip shotAudioClip;
+
     Coroutine fireCoroutine;
 
     float xMin;
@@ -28,7 +31,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         Move();
-        Fire();
+        FireRoutine();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -56,7 +59,7 @@ public class Player : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void Fire()
+    private void FireRoutine()
     {
         if (Input.GetButtonDown("Fire1"))
         {
@@ -72,11 +75,17 @@ public class Player : MonoBehaviour
     {
         while (true)
         {
-            GameObject laser = Instantiate(laserPrefab, transform.position, Quaternion.identity) as GameObject;
-            laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, laserSpeed);
+            Shot();
             yield return new WaitForSeconds(laserFiringPeriod);
         }
 
+    }
+
+    private void Shot()
+    {
+        GameObject laser = Instantiate(laserPrefab, transform.position, Quaternion.identity) as GameObject;
+        laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, laserSpeed);
+        AudioSource.PlayClipAtPoint(shotAudioClip, transform.position);
     }
 
     private void Move()
