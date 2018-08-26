@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour
+{
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] float movePadding = 1f;
     [SerializeField] GameObject laserPrefab;
     [SerializeField] float laserSpeed = 15f;
     [SerializeField] float laserFiringPeriod = 0.25f;
+    [SerializeField] float playerHealth = 600;
     Coroutine fireCoroutine;
 
     float xMin;
@@ -16,16 +18,43 @@ public class Player : MonoBehaviour {
     float yMin;
     float yMax;
 
-	// Use this for initialization
-    void Start () {
+    // Use this for initialization
+    void Start()
+    {
         SetUpMoveBondaries();
-	}
+    }
 
     // Update is called once per frame
-    void Update () {
+    void Update()
+    {
         Move();
         Fire();
-	}
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Laser laser = collision.gameObject.GetComponent<Laser>();
+        //if (laser && laser.tag == "Enemy") //not needed becouse iam using layers
+        if (laser)
+        {
+            Hit(laser);
+        }
+    }
+
+    private void Hit(Laser laser)
+    {
+        Debug.Log("PLAYER HIT!!!!!");
+        playerHealth -= laser.Damage;
+
+        if (playerHealth <= 0)
+            Die();
+
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
+    }
 
     private void Fire()
     {
@@ -33,14 +62,15 @@ public class Player : MonoBehaviour {
         {
             fireCoroutine = StartCoroutine(FireContinuously());
         }
-        if(Input.GetButtonUp("Fire1"))
+        if (Input.GetButtonUp("Fire1"))
         {
             StopCoroutine(fireCoroutine);
         }
     }
 
-    IEnumerator FireContinuously(){
-        while(true)
+    IEnumerator FireContinuously()
+    {
+        while (true)
         {
             GameObject laser = Instantiate(laserPrefab, transform.position, Quaternion.identity) as GameObject;
             laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, laserSpeed);
@@ -55,7 +85,7 @@ public class Player : MonoBehaviour {
         float deltaY = Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed;
 
         float newXPos = Mathf.Clamp(transform.position.x + deltaX, xMin, xMax);
-        float newYPos = Mathf.Clamp(transform.position.y + deltaY,yMin, yMax);
+        float newYPos = Mathf.Clamp(transform.position.y + deltaY, yMin, yMax);
 
         transform.position = new Vector2(newXPos, newYPos);
     }

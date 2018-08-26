@@ -2,9 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Laser : MonoBehaviour {
+public class Laser : MonoBehaviour
+{
 
     [SerializeField] public float damage = 100f;
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Laser laser = collision.gameObject.GetComponent<Laser>();
+
+        if (laser)
+        {
+            Hit();
+            laser.Hit();
+        }
+    }
 
     public float Damage
     {
@@ -14,7 +27,8 @@ public class Laser : MonoBehaviour {
         }
     }
 
-    public void Hit(){
+    public void Hit()
+    {
         Destroy(gameObject);
     }
 
