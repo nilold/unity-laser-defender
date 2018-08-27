@@ -11,6 +11,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] float shotPeriodRandomTweak = 5f;
     [SerializeField] int hitScore = 50;
     [SerializeField] int destroyScore = 100;
+    [SerializeField] AudioClip shotAudioClip;
+    [SerializeField] AudioClip deathSound;
+
     ScoreKeeper playerScore; 
 
     float shotPeriod = 1f;
@@ -44,6 +47,7 @@ public class Enemy : MonoBehaviour
 
     private void Shot()
     {
+        AudioSource.PlayClipAtPoint(shotAudioClip, transform.position);
         GameObject laser = Instantiate(enemyLaserPrefab, transform.position, Quaternion.identity) as GameObject;
         laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -laserSpeed);
     }
@@ -64,16 +68,15 @@ public class Enemy : MonoBehaviour
         playerScore.AddScore(hitScore);
         health -= damage;
 
-        if (health <= 0)
-            Die();
-
         laser.Hit();
 
+        if (health <= 0)
+            Die();
     }
 
     private void Die()
     {
-        Debug.Log("Enemy destroyed");
+        AudioSource.PlayClipAtPoint(deathSound, transform.position);
         playerScore.AddScore(destroyScore);
         Destroy(gameObject);
     }

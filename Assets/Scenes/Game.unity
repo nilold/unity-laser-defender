@@ -4811,6 +4811,21 @@ Prefab:
       propertyPath: shotAudioClip
       value: 
       objectReference: {fileID: 8300000, guid: 76f3d5864ced54fa5a777a5f0484760a, type: 3}
+    - target: {fileID: 114090717578016010, guid: c9f776b2ac6ea4e9f8dbed30df03eead,
+        type: 2}
+      propertyPath: deathAudioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: bf98dbd4719c54b108226c4539607518, type: 3}
+    - target: {fileID: 212751663933831640, guid: c9f776b2ac6ea4e9f8dbed30df03eead,
+        type: 2}
+      propertyPath: m_SortingLayerID
+      value: -509698149
+      objectReference: {fileID: 0}
+    - target: {fileID: 212751663933831640, guid: c9f776b2ac6ea4e9f8dbed30df03eead,
+        type: 2}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9f776b2ac6ea4e9f8dbed30df03eead, type: 2}
   m_IsPrefabAsset: 0

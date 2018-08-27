@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     [SerializeField] float playerHealth = 600;
 
     [SerializeField] AudioClip shotAudioClip;
+    [SerializeField] AudioClip deathAudioClip;
 
     Coroutine fireCoroutine;
 
@@ -46,8 +47,8 @@ public class Player : MonoBehaviour
 
     private void Hit(Laser laser)
     {
-        Debug.Log("PLAYER HIT!!!!!");
         playerHealth -= laser.Damage;
+        laser.Hit();
 
         if (playerHealth <= 0)
             Die();
@@ -56,6 +57,7 @@ public class Player : MonoBehaviour
 
     private void Die()
     {
+        AudioSource.PlayClipAtPoint(deathAudioClip, transform.position);
         Destroy(gameObject);
     }
 

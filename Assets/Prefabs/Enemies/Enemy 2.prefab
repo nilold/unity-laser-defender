@@ -110,6 +110,10 @@ MonoBehaviour:
     type: 2}
   laserSpeed: 6
   shotPeriodRandomTweak: 0.25
+  hitScore: 50
+  destroyScore: 100
+  shotAudioClip: {fileID: 8300000, guid: 3447cff834bff4f6db5da339d7f1c9ac, type: 3}
+  deathSound: {fileID: 8300000, guid: 4c6197d13e1c7423a8bd3aff851369c0, type: 3}
 --- !u!114 &114512751238007292
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -153,8 +157,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -261483713
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a555fdbc87ef446cba166e218a60c6d3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
